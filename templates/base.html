@@ -52,14 +52,16 @@
             <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="#">Logout</a>
+                        <a href="/logout">Logout</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="#">Signup</a>
+                        <a href="/signup">Signup</a>
+
+
                     </li>
                     <li>
-                        <a href="#">Login</a>
+                        <a href="/login">Login</a>
                     </li>
                 {% endif %}
             </ul>

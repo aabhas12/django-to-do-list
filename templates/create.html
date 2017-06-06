@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <h2>Create a New List</h2>
+  <form method="POST" >
+    {% csrf_token %}
+    {% for field in form1 %}
+      <p>
+        {{ field.label_tag }}
+        {{ field }}
+
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Save</button>
+
+  </form>
+{% endblock %}
