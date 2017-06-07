@@ -12,15 +12,18 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
        model = User
-       fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
+       fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
-class newlist(forms.Form):
-    Name=forms.CharField(max_length=20)
-    Priority=forms.ChoiceField(choices=models.PRIORITY_OPTIONS)
-    AssignTo=forms.ChoiceField()
-    DueDate=forms.DateField()
-
+class newlist(forms.ModelForm):
+    #Name=forms.CharField(max_length=20)
+    #Priority=forms.ChoiceField(choices=models.PRIORITY_OPTIONS)
+    #AssignTo=forms.ModelChoiceField(queryset=User.objects.all())
+    #DueDate=forms.DateField()
+    def __init__(self):
+        super(newlist, self).__init__()
+        self.fields['priority'].choices=models.PRIORITY_OPTIONS
     class Meta:
         model=List
+        fields=('name','priority','assigned_to','due_date')
 
 

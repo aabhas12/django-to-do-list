@@ -20,23 +20,31 @@ def log_out(request):
     logout(request)
     return redirect('index')
 def create(request):
-    if request.POST=='POST':
-       pass
+    if request.method=='POST':
+       form1=newlist(request.POST)
+       print ("we are here")
+       if form1.is_valid():
+           print(form1)
+           print(form1.cleaned_data.get('Priority'))
+           form1.save()
+
+           return redirect('index.html')
+
     else:
        form1= newlist()
-       data=User.objects.all()
 
-    return render(request,'create.html',{'form1':form1,'data':data})
+    return render(request,'create.html',{'form1':form1})
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('lists')
+            return redirect('index')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
