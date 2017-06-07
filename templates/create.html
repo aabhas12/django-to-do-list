@@ -5,18 +5,33 @@
   <h2>Create a New List</h2>
   <form method="POST" >
     {% csrf_token %}
-    {% for field in form1 %}
-      <p>
+  <label for="{{ form1.name.id_for_name }}">*Name</label>
+  {{ form1.name }}
+  <br>
+  {% if form1.name.help_text %}
+      <small style="color: gray">{{ form1.name.help_text }}</small>
+        {% endif %}
 
-          {{ field.label_tag }}
-        {{ field }}
 
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Save</button>
+  <br>
+  <label for="{{ form1.priority.id_for_priority }}">*Priority</label>
+  {{ form1.Priority }}
+  <br>
+   {{ form1.Priority.errors }}
+
+      <label for="{{ form1.assigned_to.id_for_assigned_to }}">Assigned To</label>
+  {{ form1.assigned_to }}
+  <br>
+  {{ form1.assigned_to.errors }}
+
+      <label for="{{ form1.due_date.id_for_due_date }}">*Due Date</label>
+  {{ form1.due_date }}
+
+<br>
+   {{ form1.due_date.errors }}
+
+      <a href="{% url 'list' %}"class="btn btn-default">Cancel</a>
+    <button type="submit"class="btn btn-default">Save</button>
 
   </form>
 {% endblock %}

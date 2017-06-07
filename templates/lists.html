@@ -11,10 +11,11 @@
                 <h4>My List</h4>
                 </div>
 
-                <a href="{% url 'create' %}">Create a New List</a>
+                <a href="{% url 'create' %}"class="btn btn-default">Create a New List</a>
 
 
                 <table class="table">
+                    <thead>
 <tr>
 <th>Name</th>
   <th>Priority</th>
@@ -26,7 +27,20 @@
   <th>Actions</th>
 
 </tr>
-
+</thead>
+                    <tbody>
+                    {% for List in Lists %}
+                    <tr>
+                        <td><a href="{% url 'list' %}">{{ List.name }}</a></td>
+                        <td>{{ List.priority }}</td>
+                    <td>{{ List.due_date }}</td>
+                    <td>{{ List.created_by }}</td><td>{{ List.assigned_to }}</td>
+                    <td>Placeholder</td>
+                    <td>PlaceHolder</td>
+                    <td>PLaceHolder</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
                 </table>
 
 

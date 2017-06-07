@@ -7,11 +7,11 @@ PRIORITY_OPTION_HIGH=1
 
 PRIORITY_OPTIONS=((PRIORITY_OPTION_HIGH,'HIGH'),(PRIORITY_OPTION_MEDIUM,'MEDIUM'),(PRIORITY_OPTION_LOW,'LOW'))
 class List(models.Model):
-    name=models.CharField(max_length=50)
-    priority=models.IntegerField()
+    name=models.CharField(max_length=50,verbose_name="*Name",help_text="Enter the name of the List")
+    priority=models.IntegerField(verbose_name="*Priority")
     created_by=models.ForeignKey(User,related_name='list_created_by')
     assigned_to=models.ForeignKey(User,related_name='list_assigned_to')
-    due_date=models.DateField()
+    due_date=models.DateField(verbose_name="*Due Date")
 
     class Meta:
         db_table = "List"

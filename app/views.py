@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from app.forms import SignUpForm, newlist
 from django.contrib.auth import logout
+from app.models import List
 from django.contrib.auth.forms import UserCreationForm
 
 from django.shortcuts import render, redirect
@@ -14,7 +15,8 @@ def index(request):
     return render(request, 'index.html', data)
 
 def lists(request):
-    return render(request, 'lists.html',{})
+    Lists=List.objects.all()
+    return render(request, 'lists.html',{'Lists':Lists})
 
 def log_out(request):
     logout(request)
@@ -24,11 +26,36 @@ def create(request):
        form1=newlist(request.POST)
        print ("we are here")
        if form1.is_valid():
-           print(form1)
-           print(form1.cleaned_data.get('Priority'))
-           form1.save()
+          abc=form1.save(commit=False)
+          abc.created_by=request.user
+          abc.priority=form1.cleaned_data.get('Priority')
 
-           return redirect('index.html')
+          #print()
+           # #form1['created_by']=
+           # form1.cleaned_data.get('prior')
+          abc.save()
+
+          return redirect('list')
+
+    else:
+       form1= newlist()
+
+    return render(request,'create.html',{'form1':form1})
+def editlist(request):
+    if request.method=='POST':
+       form1=newlist(request.POST)
+       print ("we are here")
+       if form1.is_valid():
+          abc=form1.save(commit=False)
+          abc.created_by=request.user
+          abc.priority=form1.cleaned_data.get('Priority')
+
+          #print()
+           # #form1['created_by']=
+           # form1.cleaned_data.get('prior')
+          abc.save()
+
+          return redirect('list')
 
     else:
        form1= newlist()
