@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load helper %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
@@ -16,30 +16,30 @@
 
                 <table class="table">
                     <thead>
-<tr>
-<th>Name</th>
-  <th>Priority</th>
-  <th>Due Date</th>
-  <th>Created By</th>
-  <th>Assigned To</th>
-  <th># of Completed Tasks</th>
-  <th># of Incomplete Tasks</th>
-  <th>Actions</th>
+                       <tr>
+                        <th>Name</th>
+                          <th>Priority</th>
+                          <th>Due Date</th>
+                          <th>Created By</th>
+                          <th>Assigned To</th>
+                          <th># of Completed Tasks</th>
+                          <th># of Incomplete Tasks</th>
+                          <th>Actions</th>
 
-</tr>
-</thead>
+                        </tr>
+                    </thead>
                     <tbody>
-                    {% for List in Lists %}
-                    <tr>
-                        <td><a href="{% url 'list' %}">{{ List.name }}</a></td>
-                        <td>{{ List.priority }}</td>
-                    <td>{{ List.due_date }}</td>
-                    <td>{{ List.created_by }}</td><td>{{ List.assigned_to }}</td>
-                    <td>Placeholder</td>
-                    <td>PlaceHolder</td>
-                    <td>PLaceHolder</td>
-                    </tr>
-                    {% endfor %}
+                            {% for List in Lists %}
+                            <tr>
+                                <td><a href="{% url 'list' %}">{{ List.name }}</a></td>
+                                <td>{{ data|element:List.priority }}</td>
+                                <td>{{ List.due_date }}</td>
+                                <td>{{ List.created_by }}</td><td>{{ List.assigned_to }}</td>
+                                <td>Placeholder</td>
+                                <td>PlaceHolder</td>
+                                <td>PLaceHolder</td>
+                            </tr>
+                            {% endfor %}
                     </tbody>
                 </table>
 

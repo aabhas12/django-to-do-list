@@ -6,6 +6,7 @@ PRIORITY_OPTION_MEDIUM=2
 PRIORITY_OPTION_HIGH=1
 
 PRIORITY_OPTIONS=((PRIORITY_OPTION_HIGH,'HIGH'),(PRIORITY_OPTION_MEDIUM,'MEDIUM'),(PRIORITY_OPTION_LOW,'LOW'))
+PRIORITY_OPTIONS1={PRIORITY_OPTION_HIGH:'High',PRIORITY_OPTION_MEDIUM:'Medium',PRIORITY_OPTION_LOW:'Low'}
 class List(models.Model):
     name=models.CharField(max_length=50,verbose_name="*Name",help_text="Enter the name of the List")
     priority=models.IntegerField(verbose_name="*Priority")
