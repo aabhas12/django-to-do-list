@@ -29,6 +29,8 @@ url(r'^logout/$', views.log_out, name='logout'),
 
 url(r'^lists/create/$', views.create, name='create'),
 url(r'^lists/edit/(\d+)/', views.editlist, name='editlist'),
+url(r'^lists/view/(\d+)/', views.viewlist, name='viewlist'),
+url(r'^lists/delete/(\d+)/', views.deletelist, name='deletelist'),
 
 url(r'^lists/', views.lists, name='list'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

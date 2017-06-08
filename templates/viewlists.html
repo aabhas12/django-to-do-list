@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load helper %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-md-3">{{ Lists.name }}</div>
+                    <div class="'col-md-3"><a href="#" class="btn btn-default">Add Task</a></div>
+                    <div class="'col-md-3"><a href="{% url 'deletelist' Lists.id %}" class="btn btn-default">Delete List</a></div>
+                    <div class="'col-md-3"><a href="{% url 'editlist' Lists.id %}" class="btn btn-default">Edit List</a></div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+    {% endif %}
+{% endblock %}
