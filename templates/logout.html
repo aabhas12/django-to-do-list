@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load helper %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+
+       {% else %}
+        <h4>Logged Out</h4>
+        <p>You have succesfully logged out</p>
+        <a href="{% url 'login' %}" >Log in</a> again
+    {% endif %}
+
+{% endblock %}

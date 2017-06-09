@@ -4,23 +4,99 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="panel panel-primary" xmlns="http://www.w3.org/1999/html">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ Lists.name }}<span style="float: right"><a href="{% url 'createtask' Lists.id %}" class="btn btn-success">Add Task</a>  |  <a href="{% url 'deletelist' Lists.id %}" class="btn btn-danger">Delete List</a><a href="{% url 'editlist' Lists.id %}" class="btn btn-success">Edit List</a> </span></h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group col-lg-4">
+                    <li class="list-group-item list-group-item-success">Due Date:</li>
+                    <li class="list-group-item list-group-item-warning">Priority:</li>
+                    <li class="list-group-item">Assigned To:</li>
+                    <li class="list-group-item">Created By:</li>
 
-                <div class="row">
-                    <div class="col-md-3">{{ Lists.name }}</div>
-                    <div class="'col-md-3"><a href="#" class="btn btn-default">Add Task</a></div>
-                    <div class="'col-md-3"><a href="{% url 'deletelist' Lists.id %}" class="btn btn-default">Delete List</a></div>
-                    <div class="'col-md-3"><a href="{% url 'editlist' Lists.id %}" class="btn btn-default">Edit List</a></div>
+                </ul>
+                <ul class="list-group col-lg-8">
+                    <li class="list-group-item list-group-item-success">{{Lists.due_date  }}</li>
+                    <li class="list-group-item list-group-item-warning">{{data|element:Lists.priority  }}</li>
+                    <li class="list-group-item">{{Lists.assigned_to  }}</li>
+                    <li class="list-group-item">{{Lists.created_by }}</li>
 
-                </div>
-
-
-
-
+                </ul>
 
             </div>
-
         </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tasks</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+
+
+
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title " >Complete <span style="float: right" class="badge">{{ complete }}</span></h3>
+                            </div>
+                            <div class="panel-body">
+                                {% for tasks in taskbylid %}
+                                    {% if tasks.completed  %}
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <h4 style="color: #2e6da4">{{ tasks.title }}<span style="float: right"class="badge">Completed:{{ tasks.completed_date }}</span></h4>
+                                                <p>{{ tasks.note }}</p>
+                                                <span style="float: right"> <a href="{% url 'view1task' tasks.id  %}" class="btn btn-info">View Comments</a> <a href="{% url 'martaskincom' tasks.id %}" class="btn btn-warning">Mark InComplete</a> </span>
+
+
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+                                {% endfor %}
+                                {% if complete is 0 %}
+
+                                    No Complete Task
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h3 class="panel-title ">InComplete <span style="float: right" class="badge">{{ incomplete }}</span></h3>
+
+                            </div>
+                            <div class="panel-body">
+                                {% for tasks in taskbylid %}
+                                    {% if not tasks.completed  %}
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <h4 style="color: #2e6da4">{{ tasks.title }} <span class="badge">Priority:{{ data|element:tasks.priority }}</span><span style="float: right"class="badge">Due:{{ tasks.due_date }}</span></h4>
+                                                <p>{{ tasks.note }}</p>
+                                                <span style="float: right"> <a href="{% url 'view1task' tasks.id   %}" class="btn btn-info">View Comments</a> <a href="{% url 'martaskcom' tasks.id  %}" class="btn btn-primary">Mark Complete</a> <a href="{% url 'del1task' tasks.id %}" class="btn btn-danger">Delete Task</a> <a href="{% url 'edittask' tasks.id  %}" class="btn btn-success">Edit Task</a></span>
+
+
+                                            </div>
+                                        </div>
+
+
+                                    {% endif %}
+                                {% endfor %}
+                                {% if incomplete is 0 %}
+                                    No Incomplete Task
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
     {% endif %}
 {% endblock %}

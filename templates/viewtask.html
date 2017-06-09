@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load helper %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'viewlist' lists.id %}" class="btn btn-default btn-success"><- Back to List</a>
+        <div class="panel panel-primary" >
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ task.title}}<span style="float: right"><a href="{% url 'del1task' task.id %}" class="btn btn-danger">Delete Task</a> <a href="{% url 'edittask' task.id  %}" class="btn btn-success">Edit Task</a></span></h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group col-lg-4">
+                    <li class="list-group-item">List:</li>
+                    <li class="list-group-item list-group-item-success">Due Date:</li>
+
+                    <li class="list-group-item list-group-item-warning">Priority:</li>
+                    <li class="list-group-item">Assigned To:</li>
+                    <li class="list-group-item">Created By:</li>
+
+                </ul>
+                <ul class="list-group col-lg-8">
+                    <li class="list-group-item"> <a href="{% url 'viewlist' lists.id %}">{{ lists.name }}</a></li>
+                    <li class="list-group-item list-group-item-success">{{task.due_date  }}</li>
+                    <li class="list-group-item list-group-item-warning">{{data|element:task.priority  }}</li>
+                    <li class="list-group-item">{{task.assigned_to  }}</li>
+                    <li class="list-group-item">{{task.created_by }}</li>
+
+                </ul>
+
+
+            </div>
+        </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Comments:<span style="float: right"><a href="{% url 'createcom' task.id %}" class="btn btn-default btn-success">Add a Comment</a></span></h3>
+                </div>
+                <div class="panel-body">
+                    {% for c in comment %}
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ c.author }},{{ c.date }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                {{ c.body }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                <textarea hint="enter the comment here"></textarea>
+                </div>
+            </div>
+
+
+    {% endif %}
+{% endblock %}

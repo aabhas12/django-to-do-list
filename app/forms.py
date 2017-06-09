@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from app.models import List
+from app.models import List,Task,Comment
 from app import models
 
 class SignUpForm(UserCreationForm):
@@ -15,14 +15,22 @@ class SignUpForm(UserCreationForm):
        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
 class newlist(forms.ModelForm):
-    #Name=forms.CharField(max_length=20)
-    #Priority=forms.ChoiceField(choices=models.PRIORITY_OPTIONS)
-    #AssignTo=forms.ModelChoiceField(queryset=User.objects.all())
-    #DueDate=forms.DateField()
 
     class Meta:
         model=List
         fields=('name','assigned_to','due_date')
         exclude=('created_by',)
+
+class newtask(forms.ModelForm):
+    class Meta:
+        model=Task
+        fields=('title','assigned_to','due_date','note')
+
+class newcomment(forms.ModelForm):
+    class Meta:
+        model=Comment
+        fields=('body',)
+
+
 
 

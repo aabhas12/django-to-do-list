@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+     {% if user.is_authenticated %}
+  <h2>Edit Task to : {{ list.name }}</h2>
+  <form method="POST" >
+    {% csrf_token %}
+  <label for="{{ form1.name.id_for_name }}">*Name</label>
+  {{ form1.title }}
+  <br>
+  {% if form1.name.help_text %}
+      <small style="color: gray">{{ form1.name.help_text }}</small>
+        {% endif %}
+
+
+  <br>
+  <label for="{{ form1.priority.id_for_priority }}">*Priority</label>
+  <select name="Priority" id="id_Priority">
+
+  <option value="1">HIGH</option>
+
+  <option value="2">MEDIUM</option>
+
+  <option value="3">LOW</option>
+
+</select>
+  <br>
+   {{ form1.Priority.errors }}
+
+      <label for="{{ form1.assigned_to.id_for_assigned_to }}">Assigned To</label>
+  {{ form1.assigned_to }}
+  <br>
+  {{ form1.assigned_to.errors }}
+
+      <label for="{{ form1.due_date.id_for_due_date }}">*Due Date</label>
+  {{ form1.due_date }}
+
+<br>
+      <label for="{{ form1.due_date.id_for_due_date }}">Note</label>
+  {{ form1.note }}
+
+<br>
+   {{ form1.note.errors }}
+
+          <a href="{% url 'viewlist' list.id %}"class="btn btn-default">Cancel</a>
+    <button type="submit"class="btn btn-default">Save</button>
+
+  </form>
+    {% endif %}
+    <script>
+    document.getElementById("id_Priority").value = {{ pnum }};
+    </script>
+{% endblock %}

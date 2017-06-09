@@ -19,14 +19,14 @@ class List(models.Model):
 
 class Task(models.Model):
     title=models.CharField(max_length=50)
-    list=models.ForeignKey('List')
+    list=models.ForeignKey('List',on_delete=models.CASCADE)
     created_date=models.DateField()
     due_date = models.DateField()
-    completed=models.BooleanField()
-    completed_date=models.DateField()
+    completed=models.BooleanField(default=False)
+    completed_date=models.DateField(null=True)
     created_by=models.ForeignKey(User,related_name='task_created_by')
     assigned_to=models.ForeignKey(User,related_name='task_assigned_to')
-    note=models.TextField()
+    note=models.TextField(null=True)
     priority = models.IntegerField()
 
 
@@ -36,8 +36,8 @@ class Task(models.Model):
 
 class Comment(models.Model):
     author=models.ForeignKey(User)
-    task=models.ForeignKey('Task')
-    date=models.DateField()
+    task=models.ForeignKey('Task',on_delete=models.CASCADE)
+    date=models.DateTimeField()
     body=models.TextField()
 
     class Meta:
