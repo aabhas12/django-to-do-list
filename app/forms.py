@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import Textarea
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from app.models import List,Task,Comment
@@ -27,9 +28,13 @@ class newtask(forms.ModelForm):
         fields=('title','assigned_to','due_date','note')
 
 class newcomment(forms.ModelForm):
+
     class Meta:
         model=Comment
         fields=('body',)
+        widgets = {
+            'body': Textarea(attrs={ 'class':'form-control', 'rows': 3,'placeholder':'Enter Your Comment Here'}),
+        }
 
 
 

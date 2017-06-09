@@ -20,7 +20,7 @@ def index(request):
     return render(request, 'index.html', data)
 
 def lists(request):
-    Lists=List.objects.all()
+    Lists=List.objects.all().order_by('priority')
     a={}
     b={}
     for i in Lists:
