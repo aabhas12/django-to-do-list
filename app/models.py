@@ -7,6 +7,8 @@ PRIORITY_OPTION_HIGH=1
 
 PRIORITY_OPTIONS=((PRIORITY_OPTION_HIGH,'HIGH'),(PRIORITY_OPTION_MEDIUM,'MEDIUM'),(PRIORITY_OPTION_LOW,'LOW'))
 PRIORITY_OPTIONS1={PRIORITY_OPTION_HIGH:'High',PRIORITY_OPTION_MEDIUM:'Medium',PRIORITY_OPTION_LOW:'Low'}
+
+# The model List
 class List(models.Model):
     name=models.CharField(max_length=50,verbose_name="*Name",help_text="Enter the name of the List")
     priority=models.IntegerField(verbose_name="*Priority")
@@ -16,7 +18,7 @@ class List(models.Model):
 
     class Meta:
         db_table = "List"
-
+#Task Model
 class Task(models.Model):
     title=models.CharField(max_length=50)
     list=models.ForeignKey('List',on_delete=models.CASCADE)
@@ -33,7 +35,7 @@ class Task(models.Model):
     class Meta:
         db_table = "Task"
 
-
+#The Comment Model
 class Comment(models.Model):
     author=models.ForeignKey(User)
     task=models.ForeignKey('Task',on_delete=models.CASCADE)

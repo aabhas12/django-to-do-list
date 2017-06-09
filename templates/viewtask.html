@@ -47,6 +47,9 @@
                         </div>
                         <div class="panel-body">
                             {{ c.body }}
+                        </br>
+                            <br>
+                            <a href="{% url 'delcomment' c.id %}" class="btn-sm btn-danger">Delete Comment</a> <a href="{% url 'editcomment' c.id  %}" class="btn-sm btn-success">Edit Comment</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -57,6 +60,7 @@
                         <br>
                     </div>
                     <button type="submit"class="btn btn-success">Save Comment</button>
+                </form>
             </div>
         </div>
 

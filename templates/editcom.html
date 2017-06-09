@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load helper %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'viewlist' lists.id %}" class="btn btn-default btn-success"><- Back to List</a>
+        </br>
+        </br>
+        <form method="POST" >
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form1.body }}
+                <br>
+            </div>
+            <button type="submit"class="btn btn-success">Submit Comment</button>
+        </form>
+        </div>
+        </div>
+
+
+    {% endif %}
+{% endblock %}
