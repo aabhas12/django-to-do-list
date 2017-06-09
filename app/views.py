@@ -121,10 +121,21 @@ def view1task(request,id):
     taskbyid=get_object_or_404(Task,id=id)
     listbyid=get_object_or_404(List,id=taskbyid.list.id)
     comment=Comment.objects.filter(task=id)
+    if request.method=='POST':
+       print("i am here")
+       form1=newcomment(request.POST)
+       if form1.is_valid():
 
+          abc=form1.save(commit=False)
+          abc.author=request.user
+          abc.task=taskbyid
+          abc.date= datetime.datetime.now()
+          abc.save()
+          return redirect('view1task',id )
 
-
-    return render(request,'viewtask.html',{'lists':listbyid,'task':taskbyid,'data':models.PRIORITY_OPTIONS1,'comment':comment})
+    else:
+        form1=newcomment()
+    return render(request,'viewtask.html',{'form1':form1,'lists':listbyid,'task':taskbyid,'data':models.PRIORITY_OPTIONS1,'comment':comment})
 
 
 def viewlist(request,id):
